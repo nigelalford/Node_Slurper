@@ -1,0 +1,5 @@
+{
+  //"strict": false,
+  "camelcase": false,
+  "globals": { "require, shoulde, describe, module" }
+}
