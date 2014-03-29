@@ -1,15 +1,4 @@
-// Dependencies
-var fs = require('fs'),
-	url = require('url'),
-	http = require('http'),
-	exec = require('child_process').exec,
-	spawn = require('child_process').spawn,
-	mkdirp = require('mkdirp');
-
-// App variables
-var file_url = 'http://www.js.arcgis.com/3.8amd/js/esri/',
-	setDir = './esri/',
-	esriAMD = [
+var esriAMD = [
 	'_coremap.js',
 	'arcgis/csv.js',
 	'arcgis/Portal.js',
@@ -246,6 +235,7 @@ var file_url = 'http://www.js.arcgis.com/3.8amd/js/esri/',
 	'dijit/images/home-spinner.gif',
 	'dijit/images/home.png',
 	'dijit/images/leftlongarrow.png',
+	'dijit/images/loading.gif',
 	'dijit/images/loading.gif',
 	'dijit/images/locate-spinner.gif',
 	'dijit/images/locate.png',
@@ -523,42 +513,20 @@ var file_url = 'http://www.js.arcgis.com/3.8amd/js/esri/',
 	'virtualearth/VEGeocodeResult.js',
 	'virtualearth/VETiledLayer.js',
 	'WKIDUnitConversion.js'
-	];
+];
 
-function readFile(callback) {
-    if(esriAMD.length > 0) {
-        var setFile = esriAMD.shift(),
-			fileEnding = setFile.split('/').pop(),
-			folder = setFile.substr(0,setFile.lastIndexOf('/')),
-			folders = setFile.substr(0,setFile.lastIndexOf('/')) + '/';
+module.exports = esriAMD;
 
-			//console.log(file_url + setFile);
-
-		mkdirp(setDir + folder, function(err){
-			var file = fs.createWriteStream(setDir + folders + fileEnding);
-			if(err){
-				console.log('prob: ' + err);
-			}
-
-			http.get(file_url + setFile, function(res){
-		        res.on('error', function(err){
-		        	console.log(err);
-		        });
-		        res.on('data', function(data){
-					file.write(data);
-				});
-				res.on('end', function(){ 
-					console.log(esriAMD.length);
-					readFile(callback);
-				});
-			});
-
+function getter(obj){
+	http.get(obj.url + obj.str, function(res) {
+		console.log('in');
+		res.on('data', function(data) {
+			console.log('writing');
+			obj.file.write(data);
+			console.log('writing completed');
+		}).on('end', function() {
+			console.log('done');
+			obj.file.end();
 		});
-
-    } else {
-        callback();
-    }
+	});
 }
-readFile(function() {
-    console.log("reading finished");
-});
