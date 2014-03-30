@@ -516,17 +516,3 @@ var esriAMD = [
 ];
 
 module.exports = esriAMD;
-
-function getter(obj){
-	http.get(obj.url + obj.str, function(res) {
-		console.log('in');
-		res.on('data', function(data) {
-			console.log('writing');
-			obj.file.write(data);
-			console.log('writing completed');
-		}).on('end', function() {
-			console.log('done');
-			obj.file.end();
-		});
-	});
-}
