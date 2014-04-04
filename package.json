@@ -1,5 +1,5 @@
 {
-  "name": "ESRI_Slurper",
+  "name": "Node_Scraper",
   "version": "0.0.1",
   "description": "Background tool to acquire files and folders needed for development.",
   "main": "main.js",
@@ -8,23 +8,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "tbd"
+    "url": "https://github.com/Atlmapper/Node_Slurper"
   },
   "keywords": [
     "esri",
     "node",
-    "gis",
-    "itgis",
-    "nigel"
+    "gis"
   ],
-  "author": "nigel alford",
-  "license": "os",
+  "author": "Atlmapper",
+  "license": "MIT",
   "devDependencies": {
     "chai": "~1.9.1",
     "mocha": "~1.18.2",
     "grunt": "~0.4.4",
     "grunt-mocha": "~0.4.10",
-    "should": "~3.2.0-beta1",
+    "should": "~3.2.0-beta1"
   },
   "dependencies": {
     "mkdirp": "~0.3.5"
