@@ -1,8 +1,8 @@
 {
-  "name": "Node_Scraper",
-  "version": "0.0.1",
+  "name": "node_scraper",
+  "version": "0.0.2",
   "description": "Background tool to acquire files and folders needed for development.",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "test": "test"
   },

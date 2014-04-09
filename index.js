@@ -10,39 +10,41 @@ var fs = require('fs'),
 var file_url = 'http://js.arcgis.com/3.8amd/js/esri/',
 	setDir = './esri3.8amd/';
 
-module.exports = {
-	scrape: function(loc) {
-		var readFile = function(callback) {
-			if (esriAMD.length > 0) {
-				var setFile = esriAMD.shift(),
-					fileEnding = setFile.split('/').pop(),
-					folders = setFile.substr(0, setFile.lastIndexOf('/')) + '/';
+console.log('building...');
 
-				mkdirp(setDir + folders, function(err) {
-					var file = fs.createWriteStream(setDir + folders + fileEnding);
-					if (err) {
-						console.log('prob: ' + err);
-					}
+var scrape = function(loc){
+	var readFile = function(callback) {
+		if (esriAMD.length > 0) {
+			var setFile = esriAMD.shift(),
+				fileEnding = setFile.split('/').pop(),
+				folders = setFile.substr(0, setFile.lastIndexOf('/')) + '/';
 
-					http.get(file_url + setFile, function(res) {
-						res.on('error', function(err) {
-							console.log(err);
-						});
-						res.on('data', function(data) {
-							file.write(data);
-						});
-						res.on('end', function() {
-							readFile(callback);
-						});
+			mkdirp(setDir + folders, function(err) {
+				var file = fs.createWriteStream(setDir + folders + fileEnding);
+				if (err) {
+					console.log('prob: ' + err);
+				}
+
+				http.get(file_url + setFile, function(res) {
+					res.on('error', function(err) {
+						console.log(err);
 					});
-
+					res.on('data', function(data) {
+						file.write(data);
+					});
+					res.on('end', function() {
+						readFile(callback);
+					});
 				});
 
-			} else {
-				callback();
-			}
-			console.log("reading finished");
-		};
-		return readFile;
-	}
+			});
+
+		} else {
+			callback();
+		}
+		console.log("reading finished");
+	};
+	return readFile;
 };
+
+module.exports = scrape;
