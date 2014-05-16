@@ -1,2 +1,4 @@
 node_modules
 esri3.8amd/
+index.deprecated.js
+scraper-gruntfile.deprecated.js
