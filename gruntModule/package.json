@@ -1,0 +1,42 @@
+{
+  "name": "webScraper",
+  "description": "Web Scraper designed to pull ESRI libraries into a specified project folder.",
+  "version": "0.0.2",
+  "homepage": "https://github.com/Atlmapper/Node_Slurper",
+  "author": {
+    "name": "Atlmapper",
+    "email": "nigel@bgcreatives.com",
+    "url": "https://github.com/Atlmapper"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Atlmapper/Node_Slurper"
+  },
+  "bugs": {
+    "url": "https://github.com/Atlmapper/Node_Slurper/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Atlmapper/Node_Slurper/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": "0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "webScraper, ESRI, HTML, JS, atlmapper"
+  ]
+}
